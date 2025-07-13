@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Platform</string>
+
+    <string name="new_post">Create a new post</string>
+    <string name="user_avatar">User avatar</string>
+    <string name="comment">Comment on this post</string>
+    <string name="share">Share this post</string>
+    <string name="like">Like this post</string>
 </resources>

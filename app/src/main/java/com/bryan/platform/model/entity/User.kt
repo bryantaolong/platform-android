@@ -1,4 +1,4 @@
-package com.bryan.platform_android.model // 使用您的命名空间
+package com.bryan.platform.model.entity // 使用您的命名空间
 
 import com.google.gson.annotations.SerializedName
 // import java.time.LocalDateTime // 注意：如果使用 LocalDateTime，确保你的 Gson 配置支持 Java 8 日期时间 API

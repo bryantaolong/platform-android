@@ -1,4 +1,4 @@
-package com.bryan.platform_android
+package com.bryan.platform
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

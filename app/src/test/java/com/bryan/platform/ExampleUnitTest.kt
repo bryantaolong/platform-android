@@ -1,4 +1,4 @@
-package com.bryan.platform_android
+package com.bryan.platform
 
 import org.junit.Test
 

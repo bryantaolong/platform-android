@@ -1,18 +1,17 @@
 // app/src/main/java/com/bryan/platform_android/activity/LoginActivity.kt
-package com.bryan.platform_android.activity
+package com.bryan.platform.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bryan.platform_android.MainActivity // 导入 MainActivity
-import com.bryan.platform_android.databinding.ActivityLoginBinding
-import com.bryan.platform_android.model.request.LoginRequest
-import com.bryan.platform_android.model.User
-import com.bryan.platform_android.model.response.Result
-import com.bryan.platform_android.network.AuthService
-import com.bryan.platform_android.network.RetrofitClient
+import com.bryan.platform.MainActivity
+import com.bryan.platform.databinding.ActivityLoginBinding
+import com.bryan.platform.model.request.LoginRequest
+import com.bryan.platform.model.response.Result
+import com.bryan.platform.network.AuthService
+import com.bryan.platform.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

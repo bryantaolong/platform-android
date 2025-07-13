@@ -1,9 +1,9 @@
-package com.bryan.platform_android.network // 使用您的命名空间
+package com.bryan.platform.network // 使用您的命名空间
 
-import com.bryan.platform_android.model.request.LoginRequest
-import com.bryan.platform_android.model.request.RegisterRequest
-import com.bryan.platform_android.model.User
-import com.bryan.platform_android.model.response.Result
+import com.bryan.platform.model.request.LoginRequest
+import com.bryan.platform.model.request.RegisterRequest
+import com.bryan.platform.model.entity.User
+import com.bryan.platform.model.response.Result
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

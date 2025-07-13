@@ -1,4 +1,4 @@
-package com.bryan.platform_android.model.response // 使用您的命名空间
+package com.bryan.platform.model.response // 使用您的命名空间
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,16 +1,16 @@
 // app/src/main/java/com/bryan/platform_android/activity/RegisterActivity.kt (新增文件)
-package com.bryan.platform_android.activity
+package com.bryan.platform.activity
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bryan.platform_android.databinding.ActivityRegisterBinding // 导入 ViewBinding 类
-import com.bryan.platform_android.model.User
-import com.bryan.platform_android.model.request.RegisterRequest
-import com.bryan.platform_android.model.response.Result
-import com.bryan.platform_android.network.AuthService
-import com.bryan.platform_android.network.RetrofitClient
+import com.bryan.platform.databinding.ActivityRegisterBinding
+import com.bryan.platform.model.entity.User
+import com.bryan.platform.model.request.RegisterRequest
+import com.bryan.platform.model.response.Result
+import com.bryan.platform.network.AuthService
+import com.bryan.platform.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -1,4 +1,4 @@
-package com.bryan.platform_android.network // 使用您的命名空间
+package com.bryan.platform.network // 使用您的命名空间
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

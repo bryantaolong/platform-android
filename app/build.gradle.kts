@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.bryan.platform_android" // 使用您提供的命名空间
+    namespace = "com.bryan.platform" // 使用您提供的命名空间
     compileSdk = 35
 
     defaultConfig {
