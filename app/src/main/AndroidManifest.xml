@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".PlatformApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,7 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Platformandroid"
+        android:theme="@style/Theme.Platform"
         android:usesCleartextTraffic="true" tools:targetApi="31">
         <!-- LoginActivity 设置为启动Activity (新增) -->
         <activity
@@ -31,7 +32,7 @@
 
         <!-- 您原有的 MainActivity，现已移除其 intent-filter，不再作为启动界面 -->
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false"/>
     </application>
 

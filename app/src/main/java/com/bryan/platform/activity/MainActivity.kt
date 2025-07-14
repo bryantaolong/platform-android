@@ -1,4 +1,4 @@
-package com.bryan.platform
+package com.bryan.platform.activity
 
 import android.os.Bundle
 import android.util.Log

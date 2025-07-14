@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bryan.platform.MainActivity
 import com.bryan.platform.databinding.ActivityLoginBinding
 import com.bryan.platform.model.request.LoginRequest
 import com.bryan.platform.model.response.Result
 import com.bryan.platform.network.AuthService
 import com.bryan.platform.network.RetrofitClient
+import com.bryan.platform.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,9 +67,13 @@ class LoginActivity : AppCompatActivity() {
                     val result = response.body()
                     if (result != null && result.isSuccess()) {
                         val token = result.data
-                        Toast.makeText(this@LoginActivity, "登录成功！Token: $token", Toast.LENGTH_LONG).show()
-                        Log.d("LoginActivity", "Login successful, Token: $token")
-                        // TODO: 将 Token 保存到 SharedPreferences 或其他安全存储中
+                        // 使用SessionManager保存Token和用户名
+                        if (token != null) {
+                            SessionManager.getInstance().saveAuthToken(token, username)
+                        }
+
+                        Toast.makeText(this@LoginActivity, "登录成功！", Toast.LENGTH_LONG).show()
+                        Log.d("LoginActivity", "Login successful, Token saved")
 
                         // ==== 新增跳转到 MainActivity 的代码 ====
                         val intent = Intent(this@LoginActivity, MainActivity::class.java)

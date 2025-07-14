@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Platformandroid" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Platform" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -15,5 +15,5 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Platformandroid" parent="Base.Theme.Platformandroid" />
+    <style name="Theme.Platform" parent="Base.Theme.Platform" />
 </resources>
