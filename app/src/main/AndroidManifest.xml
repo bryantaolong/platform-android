@@ -28,12 +28,14 @@
         <!-- 新增 RegisterActivity 声明 -->
         <activity
             android:name=".activity.RegisterActivity"
-            android:exported="false" /> <!-- RegisterActivity 不作为启动界面 -->
+            android:exported="false" />
 
-        <!-- 您原有的 MainActivity，现已移除其 intent-filter，不再作为启动界面 -->
         <activity
             android:name=".activity.MainActivity"
             android:exported="false"/>
+
+        <activity android:name=".activity.ProfileActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

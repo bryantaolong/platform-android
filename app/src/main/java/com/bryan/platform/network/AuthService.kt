@@ -38,5 +38,5 @@ interface AuthService {
      * @return 当前登录用户的 User 实体对象封装在统一响应结构中
      */
     @GET("api/auth/me")
-    fun getCurrentUser(): Call<kotlin.Result<User>>
+    fun getCurrentUser(): Call<Result<User>>
 }

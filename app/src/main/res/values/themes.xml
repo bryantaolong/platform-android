@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Platform" parent="Theme.Material3.DayNight.NoActionBar">
@@ -16,4 +17,11 @@
     </style>
 
     <style name="Theme.Platform" parent="Base.Theme.Platform" />
+
+    <!-- AppBarOverlay for Toolbars in Dark Action Bar context -->
+    <style name="Theme.Platform.AppBarOverlay" parent="ThemeOverlay.Material3.Toolbar.Surface" />
+
+    <!-- PopupOverlay for Popup Menus in Light context -->
+    <style name="Theme.Platform.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
+
 </resources>

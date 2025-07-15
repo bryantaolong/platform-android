@@ -6,4 +6,9 @@
     <string name="comment">Comment on this post</string>
     <string name="share">Share this post</string>
     <string name="like">Like this post</string>
+    <string name="home">首页</string>
+    <string name="moment">动态</string>
+    <string name="me">我的</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="logout">退出登录</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.bryan.platform.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bryan.platform.R
 import com.bryan.platform.adapter.MomentAdapter
 import com.bryan.platform.databinding.ActivityMainBinding
 import com.bryan.platform.model.response.Page
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
         fetchMoments()
+        setupBottomNavigation() // Setup bottom navigation
 
         binding.fabNewPost.setOnClickListener {
             // TODO: Implement logic to open a new screen for creating a post
@@ -80,5 +83,31 @@ class MainActivity : AppCompatActivity() {
                 Log.e("MainActivity", errorMsg, t)
             }
         })
+    }
+
+    private fun setupBottomNavigation() {
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                // R.id.navigation_home is the current activity, so no action needed or you can re-fetch data
+                R.id.navigation_home -> {
+                    // Optionally re-fetch moments or just stay on this screen
+                    true
+                }
+                R.id.navigation_dashboard -> {
+                    // This is also the current activity (Moments/Dashboard)
+                    // No action needed, or you can ensure it's the top of the stack
+                    true
+                }
+                R.id.navigation_profile -> {
+                    // Navigate to ProfileActivity
+                    val intent = Intent(this, ProfileActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
+        // Set the default selected item to match the current activity
+        binding.bottomNavigation.selectedItemId = R.id.navigation_dashboard // Assuming MainActivity is the Dashboard/Moments screen
     }
 }
