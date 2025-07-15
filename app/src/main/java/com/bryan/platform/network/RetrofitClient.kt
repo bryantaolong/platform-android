@@ -18,12 +18,29 @@ object RetrofitClient {
     // 后端 API 的基础 URL
     private const val BASE_URL = "http://10.0.2.2:8080/" // 模拟器访问宿主机器的本地服务地址
 
+    // 不需要认证的公共 API 路径列表
+    private val PUBLIC_URLS = listOf(
+        "/api/auth/login",
+        "/api/auth/register"
+    )
+
     // 认证拦截器，用于自动添加 Token 到请求头
     private class AuthInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             val originalRequest = chain.request()
+            val requestPath = originalRequest.url.encodedPath // 获取请求路径
 
-            // 从 SessionManager 获取 Token
+            // 检查当前请求路径是否在公共 URL 列表中
+            val isPublicUrl = PUBLIC_URLS.any { publicPath ->
+                requestPath.endsWith(publicPath) // 检查请求路径是否以公共路径结尾
+            }
+
+            // 如果是公共 URL，则不添加 Token，直接继续请求
+            if (isPublicUrl) {
+                return chain.proceed(originalRequest)
+            }
+
+            // 如果不是公共 URL，则尝试添加 Token
             val token = SessionManager.getInstance().fetchAuthToken()
 
             return if (token != null) {
@@ -33,7 +50,7 @@ object RetrofitClient {
                     .build()
                 chain.proceed(newRequest)
             } else {
-                // 没有 Token 则直接继续请求
+                // 没有 Token 则直接继续请求 (对于需要认证但没有 Token 的情况)
                 chain.proceed(originalRequest)
             }
         }
