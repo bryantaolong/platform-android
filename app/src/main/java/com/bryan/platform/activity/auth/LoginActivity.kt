@@ -1,11 +1,12 @@
 // app/src/main/java/com/bryan/platform_android/activity/LoginActivity.kt
-package com.bryan.platform.activity
+package com.bryan.platform.activity.auth
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bryan.platform.activity.MainActivity
 import com.bryan.platform.databinding.ActivityLoginBinding
 import com.bryan.platform.model.request.LoginRequest
 import com.bryan.platform.model.response.Result

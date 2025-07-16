@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
-    tools:context="com.bryan.platform.activity.RegisterActivity">
+    tools:context="com.bryan.platform.activity.auth.RegisterActivity">
 
     <TextView
         android:id="@+id/tv_register_title"

@@ -28,4 +28,15 @@
     <string name="moment">动态</string>
     <string name="me">我的</string>
 
+    <!-- Strings for UserProfileEditActivity (if not already present) -->
+    <string name="username_hint">用户名</string>
+    <string name="email_hint">邮箱</string>
+    <string name="save_button">保存</string>
+
+    <!-- New Strings for ChangePasswordActivity -->
+    <string name="old_password_hint">旧密码</string>
+    <string name="new_password_hint">新密码</string>
+    <string name="confirm_new_password_hint">确认新密码</string>
+    <string name="change_password_button">修改密码</string>
+
 </resources>

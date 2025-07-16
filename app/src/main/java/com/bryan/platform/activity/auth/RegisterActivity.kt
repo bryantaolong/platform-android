@@ -1,5 +1,5 @@
 // app/src/main/java/com/bryan/platform_android/activity/RegisterActivity.kt (新增文件)
-package com.bryan.platform.activity
+package com.bryan.platform.activity.auth
 
 import android.os.Bundle
 import android.util.Log

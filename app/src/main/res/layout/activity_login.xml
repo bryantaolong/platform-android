@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
-    tools:context="com.bryan.platform.activity.LoginActivity">
+    tools:context="com.bryan.platform.activity.auth.LoginActivity">
 
     <TextView
         android:id="@+id/tv_title"

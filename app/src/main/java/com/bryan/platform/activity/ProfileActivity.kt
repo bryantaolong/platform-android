@@ -7,6 +7,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bryan.platform.R // Import R for string and drawable resources
+import com.bryan.platform.activity.auth.LoginActivity
+import com.bryan.platform.activity.user.ChangePasswordActivity
+import com.bryan.platform.activity.user.UserProfileEditActivity
 import com.bryan.platform.databinding.ActivityProfileBinding
 import com.bryan.platform.model.entity.User
 import com.bryan.platform.model.response.Result
@@ -39,15 +42,15 @@ class ProfileActivity : AppCompatActivity() {
         binding.optionUpdateUserInfo.setOnClickListener {
             Toast.makeText(this, "修改用户信息 clicked", Toast.LENGTH_SHORT).show()
             // TODO: Navigate to Update User Info screen (e.g., new Activity for UserProfileEditActivity)
-            // val intent = Intent(this, UserProfileEditActivity::class.java)
-            // startActivity(intent)
+             val intent = Intent(this, UserProfileEditActivity::class.java)
+             startActivity(intent)
         }
 
         binding.optionChangePassword.setOnClickListener {
             Toast.makeText(this, "修改密码 clicked", Toast.LENGTH_SHORT).show()
             // TODO: Navigate to Change Password screen (e.g., new Activity for ChangePasswordActivity)
-            // val intent = Intent(this, ChangePasswordActivity::class.java)
-            // startActivity(intent)
+             val intent = Intent(this, ChangePasswordActivity::class.java)
+             startActivity(intent)
         }
 
         binding.btnLogout.setOnClickListener {
