@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName
  * @property isLast 是否是最后一页。
  * @property isFirst 是否是第一页。
  */
-data class Page<T>(
+data class SpringPage<T>(
     @SerializedName("content")
     val content: List<T>,
 
