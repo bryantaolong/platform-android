@@ -19,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/Theme.Platform.PopupOverlay"
-            app:title="个人资料" />
+            app:title="@string/profile_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -27,103 +27,233 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingBottom="16dp">
 
-            <!-- Profile Picture -->
-            <ImageView
-                android:id="@+id/iv_profile_picture"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
-                android:src="@drawable/ic_default_profile"
-                android:contentDescription="@string/profile_picture"
-                android:background="@drawable/circle_shape"
-                android:padding="4dp"
-                android:scaleType="centerCrop"/>
-
-            <!-- Username -->
-            <TextView
-                android:id="@+id/tv_username"
-                android:layout_width="wrap_content"
+            <!-- Profile Header Section: Image, Username, User ID -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="24dp"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/iv_profile_picture"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_default_profile"
+                    android:contentDescription="@string/profile_picture"
+                    android:background="@drawable/ic_circle_shape"
+                    android:padding="4dp"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textColor="@android:color/black"
+                    tools:text="testuser" />
+
+                <TextView
+                    android:id="@+id/tv_user_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray"
+                    tools:text="用户ID: 1" />
+            </LinearLayout>
+
+            <!-- Personal Profile Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginTop="16dp"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                tools:text="用户名: Bryan" />
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:background="@color/white">
 
-            <!-- Email -->
-            <TextView
-                android:id="@+id/tv_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
-                tools:text="邮箱: bryan@example.com" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/personal_profile_title"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black" />
 
-            <!-- Roles -->
-            <TextView
-                android:id="@+id/tv_roles"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp"
-                android:textColor="?attr/colorSecondary"
-                tools:text="角色: ADMIN, USER" />
+                <TextView
+                    android:id="@+id/tv_bio_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/darker_gray"
+                    tools:text="@string/personal_profile_placeholder" />
+            </LinearLayout>
 
-            <!-- Status -->
-            <TextView
-                android:id="@+id/tv_status"
-                android:layout_width="wrap_content"
+            <!-- Options Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:textSize="16sp"
-                tools:text="状态: 正常" />
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:background="@color/white">
 
-            <!-- Create Time -->
-            <TextView
-                android:id="@+id/tv_create_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
-                tools:text="创建时间: 2023-01-01 10:00:00" />
+                <!-- Option: Update User Info -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/option_update_user_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
 
-            <!-- Update Time -->
-            <TextView
-                android:id="@+id/tv_update_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray"
-                tools:text="更新时间: 2023-07-15 15:00:00" />
+                    <ImageView
+                        android:id="@+id/iv_update_user_info_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_edit_profile"
+                        android:contentDescription="@string/update_user_info_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:tint="?attr/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/tv_update_user_info_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black"
+                        android:text="@string/update_user_info_title"
+                        app:layout_constraintStart_toEndOf="@+id/iv_update_user_info_icon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_update_user_info_arrow"/>
+
+                    <ImageView
+                        android:id="@+id/iv_update_user_info_arrow"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_arrow_right_black"
+                        android:contentDescription="@string/arrow_right"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:tint="@android:color/darker_gray" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"/>
+
+                <!-- Option: Change Password -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/option_change_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:id="@+id/iv_change_password_icon"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_change_password"
+                        android:contentDescription="@string/change_password_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:tint="?attr/colorPrimary" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintStart_toEndOf="@+id/iv_change_password_icon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_change_password_arrow">
+
+                        <TextView
+                            android:id="@+id/tv_change_password_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:text="@string/change_password_title" />
+
+                        <TextView
+                            android:id="@+id/tv_change_password_subtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/darker_gray"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/change_password_subtitle" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_change_password_arrow"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_arrow_right_black"
+                        android:contentDescription="@string/arrow_right"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:tint="@android:color/darker_gray" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"/>
+
+            </LinearLayout>
 
             <!-- Logout Button -->
             <Button
                 android:id="@+id/btn_logout"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginTop="32dp"
                 android:text="@string/logout"
                 android:backgroundTint="@android:color/holo_red_light"
                 android:textColor="@android:color/white"
-                android:paddingStart="24dp"
-                android:paddingEnd="24dp"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:textSize="18sp"
@@ -134,7 +264,7 @@
                 android:id="@+id/progress_bar_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="24dp"
                 android:visibility="gone" />
 

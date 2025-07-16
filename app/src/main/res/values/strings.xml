@@ -1,14 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Existing app name -->
     <string name="app_name">Platform</string>
 
+    <!-- Main Activity Strings -->
     <string name="new_post">Create a new post</string>
     <string name="user_avatar">User avatar</string>
     <string name="comment">Comment on this post</string>
     <string name="share">Share this post</string>
     <string name="like">Like this post</string>
+
+    <!-- Profile Activity Strings -->
+    <string name="profile_title">个人资料</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="personal_profile_title">个人简介</string>
+    <string name="personal_profile_placeholder">这里是个人简介，一句话介绍自己。</string>
+    <string name="logout">退出登录</string>
+
+    <!-- Profile Option Item Strings -->
+    <string name="update_user_info_title">修改用户信息</string>
+    <string name="change_password_title">修改密码</string>
+    <string name="change_password_subtitle">修改密码</string> <!-- Subtitle for change password -->
+    <string name="arrow_right">右箭头</string> <!-- Content description for arrow icon -->
+
+    <!-- Bottom Navigation Titles -->
     <string name="home">首页</string>
     <string name="moment">动态</string>
     <string name="me">我的</string>
-    <string name="profile_picture">Profile Picture</string>
-    <string name="logout">退出登录</string>
+
 </resources>

@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bryan.platform.R
-import com.bryan.platform.databinding.ActivityProfileBinding // Make sure this matches your layout file name
+import com.bryan.platform.R // Import R for string and drawable resources
+import com.bryan.platform.databinding.ActivityProfileBinding
 import com.bryan.platform.model.entity.User
 import com.bryan.platform.model.response.Result
 import com.bryan.platform.network.AuthService
@@ -31,8 +31,24 @@ class ProfileActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true) // Enable back button
         binding.toolbar.setNavigationOnClickListener { onBackPressed() } // Handle back button click
 
+        setupBottomNavigation() // Setup bottom navigation for ProfileActivity
+
         fetchCurrentUser()
-        setupBottomNavigation() // Setup bottom navigation
+
+        // Setup click listeners for the new directly embedded options
+        binding.optionUpdateUserInfo.setOnClickListener {
+            Toast.makeText(this, "修改用户信息 clicked", Toast.LENGTH_SHORT).show()
+            // TODO: Navigate to Update User Info screen (e.g., new Activity for UserProfileEditActivity)
+            // val intent = Intent(this, UserProfileEditActivity::class.java)
+            // startActivity(intent)
+        }
+
+        binding.optionChangePassword.setOnClickListener {
+            Toast.makeText(this, "修改密码 clicked", Toast.LENGTH_SHORT).show()
+            // TODO: Navigate to Change Password screen (e.g., new Activity for ChangePasswordActivity)
+            // val intent = Intent(this, ChangePasswordActivity::class.java)
+            // startActivity(intent)
+        }
 
         binding.btnLogout.setOnClickListener {
             logoutUser()
@@ -41,7 +57,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun fetchCurrentUser() {
         binding.progressBarProfile.visibility = View.VISIBLE // Show loading indicator
-        authService.getCurrentUser().enqueue(object : Callback<Result<User>> { // Corrected Result type
+        authService.getCurrentUser().enqueue(object : Callback<Result<User>> {
             override fun onResponse(call: Call<Result<User>>, response: Response<Result<User>>) {
                 binding.progressBarProfile.visibility = View.GONE // Hide loading indicator
                 if (response.isSuccessful) {
@@ -58,7 +74,7 @@ class ProfileActivity : AppCompatActivity() {
                     } else {
                         val errorMsg = result?.message ?: "获取用户资料失败"
                         Toast.makeText(this@ProfileActivity, errorMsg, Toast.LENGTH_LONG).show()
-                        Log.e("ProfileActivity", "API Error: $errorMsg")
+                        Log.e("ProfileActivity", errorMsg)
                     }
                 } else {
                     val errorMsg = "HTTP Error: ${response.code()}"
@@ -77,15 +93,13 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun displayUserProfile(user: User) {
-        binding.tvUsername.text = "用户名: ${user.username}"
-        binding.tvEmail.text = "邮箱: ${user.email}"
-        binding.tvRoles.text = "角色: ${user.roles}"
-        binding.tvStatus.text = "状态: ${if (user.status == 0) "正常" else "封禁"}"
-        binding.tvCreateTime.text = "创建时间: ${user.createTime}"
-        binding.tvUpdateTime.text = "更新时间: ${user.updateTime}"
+        binding.tvUsername.text = user.username
+        binding.tvUserId.text = "用户ID: ${user.id}" // Display user ID
+        binding.tvBioDescription.text = getString(R.string.personal_profile_placeholder) // Placeholder for bio, update if you add a bio field to User model
 
-        // You can add logic here to load a real profile picture if available
-        // For now, it uses the default placeholder from XML
+        // The image doesn't show email, roles, status, createTime, updateTime directly in the main view.
+        // If these are needed, they could be part of the "Account Settings" screen.
+        // Removed direct display of email, roles, status, createTime, updateTime TextViews.
     }
 
     private fun logoutUser() {
@@ -102,26 +116,24 @@ class ProfileActivity : AppCompatActivity() {
     private fun setupBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                // R.id.navigation_home is the current activity, so no action needed or you can re-fetch data
                 R.id.navigation_home -> {
-                    // Navigate to MainActivity
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java) // Assuming MainActivity is Home
                     startActivity(intent)
                     true
                 }
                 R.id.navigation_dashboard -> {
-                    // This is also the current activity (Moments/Dashboard)
-                    // No action needed, or you can ensure it's the top of the stack
+                    val intent = Intent(this, MainActivity::class.java) // Assuming MainActivity is Dashboard
+                    startActivity(intent)
                     true
                 }
                 R.id.navigation_profile -> {
-                    // Optionally re-fetch moments or just stay on this screen
+                    // Already on ProfileActivity, no action needed or re-fetch data
                     true
                 }
                 else -> false
             }
         }
         // Set the default selected item to match the current activity
-        binding.bottomNavigation.selectedItemId = R.id.navigation_dashboard // Assuming MainActivity is the Dashboard/Moments screen
+        binding.bottomNavigation.selectedItemId = R.id.navigation_profile
     }
 }
