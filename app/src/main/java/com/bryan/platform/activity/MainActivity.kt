@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bryan.platform.R
 import com.bryan.platform.adapter.MomentAdapter
 import com.bryan.platform.databinding.ActivityMainBinding
-import com.bryan.platform.model.response.Page
+import com.bryan.platform.model.response.SpringPage
 import com.bryan.platform.model.entity.Moment
 import com.bryan.platform.model.response.Result
 import com.bryan.platform.network.MomentService
@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun fetchMoments() {
         binding.progressBar.visibility = View.VISIBLE
-        momentService.getAllMoments().enqueue(object : Callback<Result<Page<Moment>>> {
-            override fun onResponse(call: Call<Result<Page<Moment>>>, response: Response<Result<Page<Moment>>>) {
+        momentService.getAllMoments().enqueue(object : Callback<Result<SpringPage<Moment>>> {
+            override fun onResponse(call: Call<Result<SpringPage<Moment>>>, response: Response<Result<SpringPage<Moment>>>) {
                 binding.progressBar.visibility = View.GONE
                 if (response.isSuccessful) {
                     val result = response.body()
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<Result<Page<Moment>>>, t: Throwable) {
+            override fun onFailure(call: Call<Result<SpringPage<Moment>>>, t: Throwable) {
                 binding.progressBar.visibility = View.GONE
                 val errorMsg = "Network Failure: ${t.message}"
                 Toast.makeText(this@MainActivity, errorMsg, Toast.LENGTH_LONG).show()

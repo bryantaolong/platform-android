@@ -1,7 +1,7 @@
 package com.bryan.platform.network
 
 import com.bryan.platform.model.entity.Moment
-import com.bryan.platform.model.response.Page
+import com.bryan.platform.model.response.SpringPage
 import com.bryan.platform.model.response.Result
 import retrofit2.Call
 import retrofit2.http.Body
@@ -40,7 +40,7 @@ interface MomentService {
         @Query("page") page: Int = 0,
         @Query("size") size: Int = 10,
         @Query("sort") sort: String = "createdAt,desc"
-    ): Call<Result<Page<Moment>>>
+    ): Call<Result<SpringPage<Moment>>>
 
     /**
      * 根据ID获取动态详情。
@@ -62,7 +62,7 @@ interface MomentService {
         @Path("userId") userId: Long,
         @Query("page") page: Int = 0,
         @Query("size") size: Int = 10
-    ): Call<Result<Page<Moment>>>
+    ): Call<Result<SpringPage<Moment>>>
 
     /**
      * 获取当前登录用户的动态列表。
@@ -75,7 +75,7 @@ interface MomentService {
     fun getMyMoments(
         @Query("page") page: Int = 0,
         @Query("size") size: Int = 10
-    ): Call<Result<Page<Moment>>>
+    ): Call<Result<SpringPage<Moment>>>
 
     /**
      * 获取关注的好友的动态流。
@@ -88,7 +88,7 @@ interface MomentService {
     fun getFollowingMoments(
         @Query("page") page: Int = 0,
         @Query("size") size: Int = 10
-    ): Call<Result<Page<Moment>>>
+    ): Call<Result<SpringPage<Moment>>>
 
     /**
      * 根据ID列表批量获取动态。
@@ -127,5 +127,5 @@ interface MomentService {
         @Query("minLikes") minLikes: Int = 100,
         @Query("page") page: Int = 0,
         @Query("size") size: Int = 10
-    ): Call<Result<Page<Moment>>>
+    ): Call<Result<SpringPage<Moment>>>
 }
