@@ -44,5 +44,7 @@
     <!-- New Strings for Following/Followers List Activities -->
     <string name="following_list_title">我的关注</string>
     <string name="followers_list_title">我的粉丝</string>
+    <string name="follow_button">关注</string>
+    <string name="unfollow_button">已关注</string>
 
 </resources>
