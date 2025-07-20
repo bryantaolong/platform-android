@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ProfileActivity">
+    tools:context=".activity.user.ProfileActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -35,7 +35,7 @@
             android:orientation="vertical"
             android:paddingBottom="16dp">
 
-            <!-- Profile Header Section: Image, Username, User ID -->
+            <!-- Profile Header Section: Image, Username, User ID, Follow/Follower Counts -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,16 +62,66 @@
                     android:textStyle="bold"
                     android:textSize="22sp"
                     android:textColor="@android:color/black"
-                    tools:text="testuser" />
+                    tools:text="未登录" />
 
-                <TextView
-                    android:id="@+id/tv_user_id"
+                <!-- New: Follow and Follower Counts - Now clickable -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"
-                    tools:text="用户ID: 1" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal"> <!-- Ensure horizontal centering -->
+
+                    <!-- Following Count Clickable Area -->
+                    <LinearLayout
+                        android:id="@+id/ll_following_count_clickable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true">
+                        <TextView
+                            android:id="@+id/tv_following_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"
+                            tools:text="关注: -" />
+                    </LinearLayout>
+
+
+                    <!-- Spacer between Following and Followers -->
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="1dp" />
+
+                    <!-- Followers Count Clickable Area -->
+                    <LinearLayout
+                        android:id="@+id/ll_followers_count_clickable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true">
+                        <TextView
+                            android:id="@+id/tv_followers_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"
+                            tools:text="粉丝: -" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
 
             <!-- Personal Profile Section -->

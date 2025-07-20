@@ -22,6 +22,8 @@
     <string name="change_password_title">修改密码</string>
     <string name="change_password_subtitle">修改密码</string> <!-- Subtitle for change password -->
     <string name="arrow_right">右箭头</string> <!-- Content description for arrow icon -->
+    <string name="following_count_format">关注: %d</string> <!-- New string for following count -->
+    <string name="followers_count_format">粉丝: %d</string> <!-- New string for followers count -->
 
     <!-- Bottom Navigation Titles -->
     <string name="home">首页</string>
@@ -38,5 +40,9 @@
     <string name="new_password_hint">新密码</string>
     <string name="confirm_new_password_hint">确认新密码</string>
     <string name="change_password_button">修改密码</string>
+
+    <!-- New Strings for Following/Followers List Activities -->
+    <string name="following_list_title">我的关注</string>
+    <string name="followers_list_title">我的粉丝</string>
 
 </resources>

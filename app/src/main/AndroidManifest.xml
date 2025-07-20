@@ -34,13 +34,19 @@
             android:name=".activity.MainActivity"
             android:exported="false"/>
 
-        <activity android:name=".activity.ProfileActivity"
+        <activity android:name=".activity.user.ProfileActivity"
             android:exported="false" />
 
         <activity android:name=".activity.user.UserProfileEditActivity"
             android:exported="false" />
 
         <activity android:name=".activity.user.ChangePasswordActivity"
+            android:exported="false" />
+
+        <activity android:name=".activity.user.FollowingListActivity"
+            android:exported="false" />
+
+        <activity android:name=".activity.user.FollowersListActivity"
             android:exported="false" />
     </application>
 </manifest>

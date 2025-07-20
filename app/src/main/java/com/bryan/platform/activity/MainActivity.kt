@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bryan.platform.R
+import com.bryan.platform.activity.user.ProfileActivity
 import com.bryan.platform.adapter.MomentAdapter
 import com.bryan.platform.databinding.ActivityMainBinding
 import com.bryan.platform.model.response.SpringPage
