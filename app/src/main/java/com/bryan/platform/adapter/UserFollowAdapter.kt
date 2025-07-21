@@ -1,15 +1,14 @@
 package com.bryan.platform.adapter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bryan.platform.R
+import com.bryan.platform.activity.user.UserProfileActivity
 import com.bryan.platform.databinding.ItemUserFollowBinding
 import com.bryan.platform.model.entity.User
 import com.bryan.platform.model.response.Result
@@ -33,6 +32,7 @@ class UserFollowAdapter(
     inner class UserFollowViewHolder(private val binding: ItemUserFollowBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User) {
             binding.tvUserName.text = user.username
+
             // You can add logic here to load user avatars if available
             // binding.ivUserAvatar.setImageResource(R.drawable.ic_default_profile)
 
@@ -52,6 +52,14 @@ class UserFollowAdapter(
                     followUser(currentUserId, user.id, binding.btnFollowStatus)
                 }
             }
+
+            itemView.setOnClickListener {
+                val context = itemView.context
+                val intent = Intent(context, UserProfileActivity::class.java)
+                intent.putExtra("userId", user.id)
+                context.startActivity(intent)
+            }
+
         }
     }
 
