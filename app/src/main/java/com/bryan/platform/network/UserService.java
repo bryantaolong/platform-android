@@ -1,20 +1,23 @@
-package com.bryan.platform.network
+package com.bryan.platform.network;
 
-import com.bryan.platform.model.entity.User
-import com.bryan.platform.model.request.ChangePasswordRequest
-import com.bryan.platform.model.request.UserExportRequest
-import com.bryan.platform.model.request.UserUpdateRequest
-import com.bryan.platform.model.response.MyBatisPlusPage
-import com.bryan.platform.model.response.Result
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.http.*
+import com.bryan.platform.model.entity.User;
+import com.bryan.platform.model.request.ChangePasswordRequest;
+import com.bryan.platform.model.request.UserExportRequest;
+import com.bryan.platform.model.request.UserUpdateRequest;
+import com.bryan.platform.model.response.MyBatisPlusPage;
+import com.bryan.platform.model.response.Result;
+
+import java.util.Map;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.*;
 
 /**
  * 用户服务接口，定义了与用户相关的 API 端点。
  * 对应后端 UserController。
  */
-interface UserService {
+public interface UserService {
 
     /**
      * 获取所有用户列表（不分页）。
@@ -23,7 +26,7 @@ interface UserService {
      * @return 包含所有用户数据的分页对象。
      */
     @GET("api/user/all")
-    fun getAllUsers(): Call<Result<MyBatisPlusPage<User>>>
+    Call<Result<MyBatisPlusPage<User>>> getAllUsers();
 
     /**
      * 根据用户 ID 查询用户信息。
@@ -33,7 +36,7 @@ interface UserService {
      * @return 对应用户实体
      */
     @GET("api/user/{userId}")
-    fun getUserById(@Path("userId") userId: Long): Call<Result<User>>
+    Call<Result<User>> getUserById(@Path("userId") Long userId);
 
     /**
      * 根据用户名查询用户信息。
@@ -43,7 +46,7 @@ interface UserService {
      * @return 对应用户实体
      */
     @GET("api/user/username/{username}")
-    fun getUserByUsername(@Path("username") username: String): Call<Result<User>>
+    Call<Result<User>> getUserByUsername(@Path("username") String username);
 
     /**
      * 更新用户基本信息。
@@ -54,10 +57,10 @@ interface UserService {
      * @return 更新后的用户实体
      */
     @PUT("api/user/{userId}")
-    fun updateUser(
-        @Path("userId") userId: Long,
-        @Body userUpdateRequest: UserUpdateRequest
-    ): Call<Result<User>>
+    Call<Result<User>> updateUser(
+        @Path("userId") Long userId,
+        @Body UserUpdateRequest userUpdateRequest
+    );
 
     /**
      * 修改用户角色。
@@ -68,10 +71,10 @@ interface UserService {
      * @return 更新后的用户实体
      */
     @PUT("api/user/{userId}/role")
-    fun changeRole(
-        @Path("userId") userId: Long,
-        @Body roles: String // 后端接收 String 类型的 Body
-    ): Call<Result<User>>
+    Call<Result<User>> changeRole(
+        @Path("userId") Long userId,
+        @Body String roles
+    );
 
     /**
      * 修改用户密码。
@@ -82,10 +85,10 @@ interface UserService {
      * @return 更新后的用户实体
      */
     @PUT("api/user/{userId}/password")
-    fun changePassword(
-        @Path("userId") userId: Long,
-        @Body changePasswordRequest: ChangePasswordRequest
-    ): Call<Result<User>>
+    Call<Result<User>> changePassword(
+        @Path("userId") Long userId,
+        @Body ChangePasswordRequest changePasswordRequest
+    );
 
     /**
      * 删除用户（逻辑删除）。
@@ -95,7 +98,7 @@ interface UserService {
      * @return 被删除的用户实体
      */
     @DELETE("api/user/{userId}")
-    fun deleteUser(@Path("userId") userId: Long): Call<Result<User>>
+    Call<Result<User>> deleteUser(@Path("userId") Long userId);
 
     /**
      * 导出用户数据，支持字段选择。
@@ -105,7 +108,7 @@ interface UserService {
      * @return ResponseBody 用于处理文件下载
      */
     @POST("api/user/export")
-    fun exportUsers(@Body request: UserExportRequest): Call<ResponseBody>
+    Call<ResponseBody> exportUsers(@Body UserExportRequest request);
 
     /**
      * 导出所有用户数据，包含所有字段。
@@ -116,10 +119,10 @@ interface UserService {
      * @return ResponseBody 用于处理文件下载
      */
     @GET("api/user/export/all")
-    fun exportAllUsers(
-        @Query("status") status: Int? = null,
-        @Query("fileName") fileName: String? = null
-    ): Call<ResponseBody>
+    Call<ResponseBody> exportAllUsers(
+        @Query("status") int status,
+        @Query("fileName") String fileName
+    );
 
     /**
      * 获取可供导出的字段列表，供前端动态选择。
@@ -128,5 +131,5 @@ interface UserService {
      * @return 字段名与中文描述的映射表
      */
     @GET("api/user/export/fields")
-    fun getExportFields(): Call<Result<Map<String, String>>>
+    Call<Result<Map<String, String>>> getExportFields();
 }

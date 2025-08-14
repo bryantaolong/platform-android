@@ -1,18 +1,18 @@
-package com.bryan.platform.network // 使用您的命名空间
+package com.bryan.platform.network;
 
-import com.bryan.platform.model.request.LoginRequest
-import com.bryan.platform.model.request.RegisterRequest
-import com.bryan.platform.model.entity.User
-import com.bryan.platform.model.response.Result
-import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import com.bryan.platform.model.request.LoginRequest;
+import com.bryan.platform.model.request.RegisterRequest;
+import com.bryan.platform.model.entity.User;
+import com.bryan.platform.model.response.Result;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 /**
  * 认证服务接口，定义了与用户认证相关的 API 端点
  */
-interface AuthService {
+public interface AuthService {
 
     /**
      * 用户登录接口
@@ -21,7 +21,7 @@ interface AuthService {
      * @return Retrofit Call 对象，成功时返回 Result<String> (String 为 JWT Token)
      */
     @POST("api/auth/login")
-    fun login(@Body loginRequest: LoginRequest): Call<Result<String>>
+    Call<Result<String>> login(@Body LoginRequest loginRequest);
 
     /**
      * 用户注册接口
@@ -30,7 +30,7 @@ interface AuthService {
      * @return Retrofit Call 对象，成功时返回 Result<User> (User 为注册成功的用户实体)
      */
     @POST("api/auth/register")
-    fun register(@Body registerRequest: RegisterRequest): Call<Result<User>>
+    Call<Result<User>> register(@Body RegisterRequest registerRequest);
 
     /**
      * 获取当前认证用户信息
@@ -38,5 +38,5 @@ interface AuthService {
      * @return 当前登录用户的 User 实体对象封装在统一响应结构中
      */
     @GET("api/auth/me")
-    fun getCurrentUser(): Call<Result<User>>
+    Call<Result<User>> getCurrentUser();
 }
