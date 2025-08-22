@@ -14,7 +14,7 @@ import com.bryan.platform.R;
 import com.bryan.platform.adapter.UserFollowAdapter;
 import com.bryan.platform.databinding.ActivityFollowersListBinding;
 import com.bryan.platform.model.entity.User;
-import com.bryan.platform.model.response.MyBatisPlusPage;
+import com.bryan.platform.model.response.MyBatisPage;
 import com.bryan.platform.model.response.Result;
 import com.bryan.platform.network.RetrofitClient;
 import com.bryan.platform.network.UserFollowService;
@@ -102,17 +102,17 @@ public class FollowersListActivity extends AppCompatActivity {
         binding.progressBarList.setVisibility(View.VISIBLE);
 
         userFollowService.getFollowerUsers(userId, 1, 20)
-                .enqueue(new Callback<Result<MyBatisPlusPage<User>>>() {
+                .enqueue(new Callback<Result<MyBatisPage<User>>>() {
                     @Override
-                    public void onResponse(Call<Result<MyBatisPlusPage<User>>> call,
-                                           Response<Result<MyBatisPlusPage<User>>> response) {
+                    public void onResponse(Call<Result<MyBatisPage<User>>> call,
+                                           Response<Result<MyBatisPage<User>>> response) {
                         binding.progressBarList.setVisibility(View.GONE);
 
                         if (response.isSuccessful() && response.body() != null) {
-                            Result<MyBatisPlusPage<User>> result = response.body();
+                            Result<MyBatisPage<User>> result = response.body();
                             if (result.isSuccess()) {
                                 List<User> followerUsers = result.getData() != null
-                                        ? result.getData().getRecords()
+                                        ? result.getData().getRows()
                                         : Collections.emptyList();
                                 userFollowAdapter.updateData(followerUsers);
                                 Log.d("FollowersListActivity",
@@ -134,7 +134,7 @@ public class FollowersListActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<Result<MyBatisPlusPage<User>>> call, Throwable t) {
+                    public void onFailure(Call<Result<MyBatisPage<User>>> call, Throwable t) {
                         binding.progressBarList.setVisibility(View.GONE);
                         String errorMsg = "网络请求失败: " + t.getMessage();
                         Toast.makeText(FollowersListActivity.this,

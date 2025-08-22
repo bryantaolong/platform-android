@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bryan.platform.R;
 import com.bryan.platform.databinding.ActivityUserProfileBinding;
 import com.bryan.platform.model.entity.User;
-import com.bryan.platform.model.response.MyBatisPlusPage;
+import com.bryan.platform.model.response.MyBatisPage;
 import com.bryan.platform.model.response.Result;
 import com.bryan.platform.network.RetrofitClient;
 import com.bryan.platform.network.UserFollowService;
@@ -89,13 +89,13 @@ public class UserProfileActivity extends AppCompatActivity {
     private void fetchFollowCounts(long userId) {
         // Following count
         userFollowService.getFollowingUsers(userId, 1, 1)
-                .enqueue(new Callback<Result<MyBatisPlusPage<User>>>() {
+                .enqueue(new Callback<Result<MyBatisPage<User>>>() {
                     @Override
-                    public void onResponse(@NonNull Call<Result<MyBatisPlusPage<User>>> call,
-                                           @NonNull Response<Result<MyBatisPlusPage<User>>> response) {
+                    public void onResponse(@NonNull Call<Result<MyBatisPage<User>>> call,
+                                           @NonNull Response<Result<MyBatisPage<User>>> response) {
                         long total = 0;
                         if (response.isSuccessful()) {
-                            Result<MyBatisPlusPage<User>> result = response.body();
+                            Result<MyBatisPage<User>> result = response.body();
                             if (result != null && result.isSuccess()
                                     && result.getData() != null) {
                                 total = result.getData().getTotal();
@@ -106,7 +106,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<Result<MyBatisPlusPage<User>>> call,
+                    public void onFailure(@NonNull Call<Result<MyBatisPage<User>>> call,
                                           @NonNull Throwable t) {
                         binding.tvFollowingCount.setText(
                                 getString(R.string.following_count_format, 0));
@@ -117,13 +117,13 @@ public class UserProfileActivity extends AppCompatActivity {
 
         // Follower count
         userFollowService.getFollowerUsers(userId, 1, 1)
-                .enqueue(new Callback<Result<MyBatisPlusPage<User>>>() {
+                .enqueue(new Callback<Result<MyBatisPage<User>>>() {
                     @Override
-                    public void onResponse(@NonNull Call<Result<MyBatisPlusPage<User>>> call,
-                                           @NonNull Response<Result<MyBatisPlusPage<User>>> response) {
+                    public void onResponse(@NonNull Call<Result<MyBatisPage<User>>> call,
+                                           @NonNull Response<Result<MyBatisPage<User>>> response) {
                         long total = 0;
                         if (response.isSuccessful()) {
-                            Result<MyBatisPlusPage<User>> result = response.body();
+                            Result<MyBatisPage<User>> result = response.body();
                             if (result != null && result.isSuccess()
                                     && result.getData() != null) {
                                 total = result.getData().getTotal();
@@ -134,7 +134,7 @@ public class UserProfileActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(@NonNull Call<Result<MyBatisPlusPage<User>>> call,
+                    public void onFailure(@NonNull Call<Result<MyBatisPage<User>>> call,
                                           @NonNull Throwable t) {
                         binding.tvFollowersCount.setText(
                                 getString(R.string.followers_count_format, 0));

@@ -1,7 +1,7 @@
 package com.bryan.platform.network;
 
 import com.bryan.platform.model.entity.User;
-import com.bryan.platform.model.response.MyBatisPlusPage;
+import com.bryan.platform.model.response.MyBatisPage;
 import com.bryan.platform.model.response.Result;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -42,7 +42,7 @@ public interface UserFollowService {
      * @return 分页的关注用户列表
      */
     @GET("api/user_follow/following/{userId}")
-    Call<Result<MyBatisPlusPage<User>>> getFollowingUsers(
+    Call<Result<MyBatisPage<User>>> getFollowingUsers(
         @Path("userId") Long userId,
         @Query("pageNum") int pageNum,
         @Query("pageSize") int pageSize
@@ -58,7 +58,7 @@ public interface UserFollowService {
      * @return 分页的粉丝用户列表
      */
     @GET("api/user_follow/followers/{userId}")
-    Call<Result<MyBatisPlusPage<User>>> getFollowerUsers(
+    Call<Result<MyBatisPage<User>>> getFollowerUsers(
         @Path("userId") Long userId,
         @Query("pageNum") int pageNum,
         @Query("pageSize") int pageSize

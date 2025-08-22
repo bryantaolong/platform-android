@@ -1,10 +1,8 @@
 package com.bryan.platform.network;
 
 import com.bryan.platform.model.entity.User;
-import com.bryan.platform.model.request.ChangePasswordRequest;
-import com.bryan.platform.model.request.UserExportRequest;
-import com.bryan.platform.model.request.UserUpdateRequest;
-import com.bryan.platform.model.response.MyBatisPlusPage;
+import com.bryan.platform.model.request.*;
+import com.bryan.platform.model.response.MyBatisPage;
 import com.bryan.platform.model.response.Result;
 
 import java.util.Map;
@@ -14,122 +12,95 @@ import retrofit2.Call;
 import retrofit2.http.*;
 
 /**
- * 用户服务接口，定义了与用户相关的 API 端点。
- * 对应后端 UserController。
+ * 用户服务接口（与后端 UserController 完全对齐）
  */
 public interface UserService {
 
-    /**
-     * 获取所有用户列表（不分页）。
-     * 对应后端 GET /api/user/all
-     *
-     * @return 包含所有用户数据的分页对象。
-     */
-    @GET("api/user/all")
-    Call<Result<MyBatisPlusPage<User>>> getAllUsers();
+    /* ---------------- 查询类接口 ---------------- */
 
-    /**
-     * 根据用户 ID 查询用户信息。
-     * 对应后端 GET /api/user/{userId}
-     *
-     * @param userId 目标用户ID
-     * @return 对应用户实体
-     */
+    /** 获取所有用户（分页） */
+    @POST("api/user/all")
+    Call<Result<MyBatisPage<User>>> getAllUsers(
+            @Query("pageNum") int pageNum,
+            @Query("pageSize") int pageSize
+    );
+
+    /** 根据 ID 查询 */
     @GET("api/user/{userId}")
     Call<Result<User>> getUserById(@Path("userId") Long userId);
 
-    /**
-     * 根据用户名查询用户信息。
-     * 对应后端 GET /api/user/username/{username}
-     *
-     * @param username 用户名
-     * @return 对应用户实体
-     */
+    /** 根据用户名查询 */
     @GET("api/user/username/{username}")
     Call<Result<User>> getUserByUsername(@Path("username") String username);
 
-    /**
-     * 更新用户基本信息。
-     * 对应后端 PUT /api/user/{userId}
-     *
-     * @param userId 目标用户ID
-     * @param userUpdateRequest 包含需要更新的信息（用户名、邮箱等）
-     * @return 更新后的用户实体
-     */
+    /** 多条件搜索 + 分页 */
+    @POST("api/user/search")
+    Call<Result<MyBatisPage<User>>> searchUsers(
+            @Body UserSearchRequest searchRequest,
+            @Query("pageNum") Long pageNum,
+            @Query("pageSize") Long pageSize
+    );
+
+    /* ---------------- 更新类接口 ---------------- */
+
+    /** 更新基本信息 */
     @PUT("api/user/{userId}")
     Call<Result<User>> updateUser(
-        @Path("userId") Long userId,
-        @Body UserUpdateRequest userUpdateRequest
+            @Path("userId") Long userId,
+            @Body UserUpdateRequest userUpdateRequest
     );
 
-    /**
-     * 修改用户角色。
-     * 对应后端 PUT /api/user/{userId}/role
-     *
-     * @param userId 目标用户ID
-     * @param roles 新角色字符串，逗号分隔（如 "ROLE_USER,ROLE_ADMIN"）
-     * @return 更新后的用户实体
-     */
-    @PUT("api/user/{userId}/role")
-    Call<Result<User>> changeRole(
-        @Path("userId") Long userId,
-        @Body String roles
+    /** 修改角色（管理员） */
+    @PUT("api/user/users/{userId}/roles")
+    Call<Result<User>> changeRoleByIds(
+            @Path("userId") Long userId,
+            @Body ChangeRoleRequest roles
     );
 
-    /**
-     * 修改用户密码。
-     * 对应后端 PUT /api/user/{userId}/password
-     *
-     * @param userId 目标用户ID
-     * @param changePasswordRequest 包含旧密码和新密码的请求体
-     * @return 更新后的用户实体
-     */
+    /** 普通修改密码（需提供旧密码） */
     @PUT("api/user/{userId}/password")
     Call<Result<User>> changePassword(
-        @Path("userId") Long userId,
-        @Body ChangePasswordRequest changePasswordRequest
+            @Path("userId") Long userId,
+            @Body ChangePasswordRequest changePasswordRequest
     );
 
-    /**
-     * 删除用户（逻辑删除）。
-     * 对应后端 DELETE /api/user/{userId}
-     *
-     * @param userId 目标用户ID
-     * @return 被删除的用户实体
-     */
+    /** 管理员强制修改密码 */
+    @PUT("api/user/{userId}/password/force/{newPassword}")
+    Call<Result<User>> changePasswordForcefully(
+            @Path("userId") Long userId,
+            @Body ChangePasswordRequest changePasswordRequest
+    );
+
+    /* ---------------- 状态变更接口 ---------------- */
+
+    /** 封禁用户 */
+    @PUT("api/user/{userId}/block")
+    Call<Result<User>> blockUser(@Path("userId") Long userId);
+
+    /** 解封用户 */
+    @PUT("api/user/{userId}/unblock")
+    Call<Result<User>> unblockUser(@Path("userId") Long userId);
+
+    /* ---------------- 删除接口 ---------------- */
+
+    /** 逻辑删除用户 */
     @DELETE("api/user/{userId}")
     Call<Result<User>> deleteUser(@Path("userId") Long userId);
 
-    /**
-     * 导出用户数据，支持字段选择。
-     * 对应后端 POST /api/user/export
-     *
-     * @param request 导出请求体，包含导出字段和筛选条件
-     * @return ResponseBody 用于处理文件下载
-     */
+    /* ---------------- 导出接口 ---------------- */
+
+    /** 按条件导出 */
     @POST("api/user/export")
     Call<ResponseBody> exportUsers(@Body UserExportRequest request);
 
-    /**
-     * 导出所有用户数据，包含所有字段。
-     * 对应后端 GET /api/user/export/all
-     *
-     * @param status 用户状态筛选，非必填
-     * @param fileName 导出文件名，默认 "用户数据"
-     * @return ResponseBody 用于处理文件下载
-     */
+    /** 导出全部 */
     @GET("api/user/export/all")
     Call<ResponseBody> exportAllUsers(
-        @Query("status") int status,
-        @Query("fileName") String fileName
+            @Query("status") Integer status,
+            @Query("fileName") String fileName
     );
 
-    /**
-     * 获取可供导出的字段列表，供前端动态选择。
-     * 对应后端 GET /api/user/export/fields
-     *
-     * @return 字段名与中文描述的映射表
-     */
+    /** 获取可导出字段列表 */
     @GET("api/user/export/fields")
     Call<Result<Map<String, String>>> getExportFields();
 }
